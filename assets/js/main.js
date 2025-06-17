@@ -306,13 +306,11 @@
 			});
 
 		// Events.
-			$body.on('click', function(event) {
-
-				// Article visible? Hide.
-					if ($body.hasClass('is-article-visible'))
-						$main._hide(true);
-
-			});
+		$body.on('click', function(event) {
+			// Only hide if we're not in a form
+			if ($body.hasClass('is-article-visible') && !$(event.target).closest('form').length)
+				$main._hide(true);
+		});
 
 			$window.on('keyup', function(event) {
 
@@ -334,6 +332,21 @@
 			});
 
 			$window.on('hashchange', function(event) {
+				const $activeArticle = $main_articles.filter('.active');
+			
+				// If form is submitting (i.e., still same hash and form is open), ignore hash change
+				if (location.hash === '#' || location.hash === '' || $activeArticle.length === 0) {
+					event.preventDefault();
+					event.stopPropagation();
+					$main._hide();
+				}
+				else if ($main_articles.filter(location.hash).length > 0) {
+					// If we're clicking a new link, allow the show
+					event.preventDefault();
+					event.stopPropagation();
+					$main._show(location.hash.substr(1));
+				}
+			
 
 				// Empty hash?
 					if (location.hash == ''

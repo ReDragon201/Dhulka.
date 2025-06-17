@@ -35,8 +35,8 @@
 						</div>
 						<nav>
 							<ul>
-								<li><a href="#intro">who we are...</a></li>
-								<li><a href="#work">meet the team...</a></li>
+								<li><a href="#who-we-are">who we are...</a></li>
+								<li><a href="#meet-the-team">meet the team...</a></li>
 								<li><a href="#contact">work with us...</a></li>
 								<!--<li><a href="#elements">Elements</a></li>-->
 							</ul>
@@ -47,7 +47,7 @@
 					<div id="main">
 
 						<!-- Intro -->
-							<article id="intro">
+							<article id="who-we-are">
 								<h2 class="major">Who We Are</h2>
 								<span class="image main"><img src="images/pic01.jpg" alt="" /></span>
 								<h3>"dhulka." is a web design and development studio focused on building clean, modern websites for small businesses and entrepreneurs. We help brands establish a strong digital presence with responsive, user-friendly designs tailored to their unique goals.</h3>
@@ -69,7 +69,7 @@
 							</article>
 
 						<!-- Work -->
-							<article id="work">
+							<article id="meet-the-team">
 								<h2 class="major">meet the team</h2>
 								<span class="image main"><img src="images/pic02.jpg" alt="" /></span>
 								<h3>"dhulka." was founded and is run by a Somali high school student with a passion for design, coding, and helping others. Seeing how many small businesses—especially those in immigrant and underserved communities—struggled with building a strong online presence, he created "dhulka." to provide affordable, modern websites tailored to their needs. His mission is to empower local entrepreneurs through accessible digital tools and clean, professional design.</p>
@@ -85,20 +85,22 @@
 
 						<!-- Contact -->
 							<article id="contact">
-								<h2 class="major">work with us</h2>
-								<form method="POST" action="https://formsubmit.co/leebanhussein26@gmail.com" enctype="text/plain">
+								<h2 class="major">Work With Us</h2>
+								<form id="contact-form">
+									<input type="hidden" name="_captcha" value="false">
+									<input type="hidden" name="_template" value="table">
 									<div class="fields">
 										<div class="field half">
 											<label for="name">Name</label>
-											<input type="text" name="name" id="name" />
+											<input type="text" name="name" id="name" required/>
 										</div>
 										<div class="field half">
 											<label for="email">Email</label>
-											<input type="text" name="email" id="email" />
+											<input type="text" name="email" id="email" required/>
 										</div>
 										<div class="field">
 											<label for="message">Message</label>
-											<textarea name="message" id="message" rows="4"></textarea>
+											<textarea name="message" id="message" rows="4" required></textarea>
 										</div>
 									</div>
 									<ul class="actions">
@@ -106,6 +108,34 @@
 										<li><input type="reset" value="Reset" /></li>
 									</ul>
 								</form>
+
+								<h2 id="form-response" style="display:none; color:rgb(255, 255, 255);">Message sent</h2>
+								<p></p>
+								<script>
+									document.getElementById("contact-form").addEventListener("submit", function(e) {
+									  e.preventDefault(); // Prevent actual page reload
+									
+									  const form = e.target;
+									  const data = new FormData(form);
+									
+									  fetch("https://formsubmit.co/leebanhussein26@gmail.com", {
+										method: "POST",
+										body: data
+									  })
+									  .then(response => {
+										if (response.ok) {
+										  document.getElementById("form-response").style.display = "block";
+										  form.reset();
+										} else {
+										  alert("There was an error. Please try again.");
+										}
+									  })
+									  .catch(error => {
+										alert("Network error. Please try again later.");
+									  });
+									});
+									</script>
+					
 								<ul class="icons">
 									<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
 								</ul>
