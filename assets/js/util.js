@@ -126,10 +126,10 @@
 									$this.scrollTop(0);
 
 							// Reset forms.
-								if (config.resetForms)
-									$this.find('form').each(function() {
-										this.reset();
-									});
+								// if (config.resetForms)
+									//$this.find('form').each(function() {
+										//this.reset();
+									//});
 
 						}, config.delay);
 
